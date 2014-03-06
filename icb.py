@@ -5,11 +5,11 @@ import sys
 import time
 import subprocess
 
-
+#netsh interface set interface "Подключение по локальной сети" admin=DISABLED
 #команда включения интернета
-CONNECTION_ON = "echo 'on'"
+CONNECTION_ON = 'netsh interface set interface "Подключение по локальной сети" admin=ENABLED'
 #команда выключения интернета
-CONNECTION_OFF = "echo 'off'"
+CONNECTION_OFF = 'netsh interface set interface "Подключение по локальной сети" admin=DISABLED'
 #равномерная длительность разрыва
 WAVE_TYPE_CONST = "const"
 #длительность разрыва увеличивается от нуля до ДР к концу волны
@@ -23,13 +23,13 @@ WAVE_TYPE_HEEL = "heel"
 def main():
 
     #количество разрывов в одной волне
-    brakes_amount = 10
+    brakes_amount = 4
 
     #время между разрывами
-    brakes_pause = 1
+    brakes_pause = 2
 
     #длительность разрыва
-    brakes_duration = 20
+    brakes_duration = 3
 
     #время между волнами
     wave_pause = 30
@@ -86,7 +86,7 @@ def main():
                     #print((brakes_amount - i) * (brakes_duration / (brakes_amount/2)))
             else:
                 assert False, "wave_type - " + wave_type + " not found"
-                
+
             subprocess.call(CONNECTION_ON, shell=True)
             i += 1
             time.sleep(brakes_pause)
