@@ -3,6 +3,7 @@
 import getopt
 import sys
 import time
+import datetime
 import subprocess
 
 connection_name = "Подключение по локальной сети"
@@ -22,17 +23,17 @@ WAVE_TYPE_HEEL = "heel"
 
 
 def main():
-
+    #константы по умолчанию
     #количество разрывов в одной волне
     brakes_amount = 4
 
-    #время между разрывами
+    #время между разрывами (секунды)
     brakes_pause = 2
 
-    #длительность разрыва
+    #длительность разрыва (секунды)
     brakes_duration = 3
 
-    #время между волнами
+    #время между волнами (секунды)
     wave_pause = 30
 
     #тип волны
@@ -64,11 +65,15 @@ def main():
     if brakes_amount % 2 != 0:
         brakes_amount += 1
 
+    print("Parameters: \n brakes_amount = ", brakes_amount, "\n brakes_pause = ", brakes_pause, '\n brakes_duration = ',
+          brakes_duration, "\n wave_pause = ", wave_pause, "\n wave_type = ", wave_type)
+
     while True:
         #одна волна
         i = 0
         while i < brakes_amount:
             subprocess.call(CONNECTION_OFF, shell=True)
+            print("Connection off at ", datetime.datetime.now().strftime("%H:%M:%S"))
             if wave_type == WAVE_TYPE_CONST:
                 time.sleep(brakes_duration)
                 #print(brakes_duration)
@@ -80,15 +85,16 @@ def main():
                 #print((brakes_amount - i) * (brakes_duration / brakes_amount))
             elif wave_type == WAVE_TYPE_HEEL:
                 if i < brakes_amount / 2:
-                    time.sleep((i + 1) * (brakes_duration / (brakes_amount/2)))
+                    time.sleep((i + 1) * (brakes_duration / (brakes_amount / 2)))
                     #print((i + 1) * (brakes_duration / (brakes_amount/2)))
                 else:
-                    time.sleep((brakes_amount - i) * (brakes_duration / (brakes_amount/2)))
+                    time.sleep((brakes_amount - i) * (brakes_duration / (brakes_amount / 2)))
                     #print((brakes_amount - i) * (brakes_duration / (brakes_amount/2)))
             else:
                 assert False, "wave_type - " + wave_type + " not found"
 
             subprocess.call(CONNECTION_ON, shell=True)
+            print("Connection on at ", datetime.datetime.now().strftime("%H:%M:%S"))
             i += 1
             time.sleep(brakes_pause)
 
