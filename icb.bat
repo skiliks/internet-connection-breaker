@@ -1,0 +1,1 @@
+python C:\internetConnectionBreaker\icb.py %*
