@@ -1,1 +1,1 @@
-python C:\internetConnectionBreaker\icb.py %*
+python .\icb.py %*
