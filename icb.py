@@ -56,7 +56,7 @@ def main():
         elif o == "--wave_pause":
             wave_pause = int(a)
         elif o == "--wave_type":
-            wave_type = int(a)
+            wave_type = a
         else:
             print("Name = " + o)
             print("Value = " + a)
