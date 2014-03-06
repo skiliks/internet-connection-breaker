@@ -25,24 +25,24 @@ Parameters of internet-connection-breaker:
 
 brakes_amount - number of internet connection breaks in one wave ([0..n] integer)
 
-rakes_pause - time in seconds between internet connection breaks ([0..n] double)
+rakes_pause - time in seconds between internet connection breaks ([0..n] integer)
 
-brakes_duration - time in seconds of internet connection break ([0..n] double)
+brakes_duration - time in seconds of internet connection break ([0..n] integer)
 
-wave_pause - time in seconds between waves ([0..n] double)
+wave_pause - time in seconds between waves ([0..n] integer)
 
 wave_type - type of stream ("const", "up", "down", "heel")
 
 
 What is wave type?
 
-const - stream of waves looks like sinus
+const - stream of waves looks like sinus graph
 
-up - stream of waves looks like 
+up - stream of waves where number of connection breaks incrementally changes
 
-down - stream waves looks like 
+down - stream waves where number of connection breaks decrementally changes 
 
-heel - stream waves looks like 
+heel - stream waves looks like normal distribution
 
 The standart values of parameters:
 
