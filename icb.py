@@ -26,13 +26,16 @@ def main():
     brakes_pause = 2
 
     #длительность разрыва
-    brakes_duration = 2
+    brakes_duration = 1
 
     #время между волнами
     wave_pause = 3
 
     #тип волны
     wave_type = WAVE_TYPE_CONST
+
+    #интервал нарастания
+    interval_growth = 0.5
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "",
@@ -43,29 +46,36 @@ def main():
         sys.exit(2)
     for o, a in opts:
         if o == "--brakes_amount":
-            brakes_amount = a
+            brakes_amount = int(a)
         elif o == "--brakes_pause":
-            brakes_pause = a
+            brakes_pause = int(a)
         elif o == "--brakes_duration":
-            brakes_duration = a
+            brakes_duration = int(a)
         elif o == "--wave_pause":
-            wave_pause = a
+            wave_pause = int(a)
         elif o == "--wave_type":
-            wave_type = a
+            wave_type = int(a)
         else:
             print("Name = "+o)
             print("Value = "+a)
             assert False, "unhandled option"
             # ...
 
-    #while True:
-    i = 0
-    while i < 2:
-        subprocess.call(CONNECTION_ON, shell=True)
-        #time.sleep(3)
-        i += 1
-        print(i)
-        print(brakes_amount)
+    while True:
+        #одна волна
+        i = 0
+        while i < brakes_amount:
+
+            subprocess.call(CONNECTION_OFF, shell=True)
+            time.sleep(brakes_duration)
+            subprocess.call(CONNECTION_ON, shell=True)
+
+            time.sleep(brakes_pause)
+            i += 1
+            print(i)
+            print(brakes_amount)
+
+        time.sleep(wave_pause)
 
 if __name__ == "__main__":
     main()
