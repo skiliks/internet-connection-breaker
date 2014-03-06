@@ -5,11 +5,12 @@ import sys
 import time
 import subprocess
 
+connection_name = "Подключение по локальной сети"
 #netsh interface set interface "Подключение по локальной сети" admin=DISABLED
 #команда включения интернета
-CONNECTION_ON = 'netsh interface set interface "Подключение по локальной сети" admin=ENABLED'
+CONNECTION_ON = 'netsh interface set interface "' + connection_name + '" admin=ENABLED'
 #команда выключения интернета
-CONNECTION_OFF = 'netsh interface set interface "Подключение по локальной сети" admin=DISABLED'
+CONNECTION_OFF = 'netsh interface set interface "' + connection_name + '" admin=DISABLED'
 #равномерная длительность разрыва
 WAVE_TYPE_CONST = "const"
 #длительность разрыва увеличивается от нуля до ДР к концу волны
